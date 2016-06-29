@@ -1,4 +1,5 @@
 export type Word = {
+  index: number;
   previous: string;
   now: string;
   next: string;
@@ -8,7 +9,7 @@ const startIndex = 0;
 const maxNumber = 40;
 
 const data = [
-  'あ', 'い', 'う', 'え', 'お', 
+  'あ', 'い', 'う', 'え', 'お',
   'か', 'き', 'く', 'け', 'こ',
   'さ', 'し', 'す', 'せ', 'そ',
   'た', 'ち', 'つ', 'て', 'と',
@@ -20,34 +21,42 @@ const data = [
 ];
 
 const initialState: Word = {
+  index: startIndex,
   previous: data[maxNumber],
   now: data[startIndex],
   next: data[startIndex + 1],
 };
 
 export default (state: Word = initialState, action) => {
-  switch (action) {
+  word = action.word
+  switch (action.type) {
     case 'FORWARD':
-      nextIndex = data.indexOf(next) + 1;
-      return {
-        previous: now,
-        now: next,
-        next: data[41 % nextIndex]
-      };
-    case 'BACK':
-      previousIndex = data.indexOf(previous) - 1;
-      if (previousIndex < 0) {
-        previousIndex = maxNumber;
+      word.index += 1;
+      if (word.index > 40) {
+        word.index = startIndex;
       }
       return {
-        previous: data[41 % previousIndex],
-        now: previous,
-        next: now,
+        index: word.index,
+        previous: word.now,
+        now: word.next,
+        next: data[word.index],
+      };
+    case 'BACK':
+      word.index -= 1;
+      if (word.index < 0) {
+        word.index = maxNumber;
+      }
+      return {
+        index: word.index,
+        previous: data[word.index],
+        now: word.previous,
+        next: word.now,
       };
     case 'START':
       return initialState;
     case 'END':
       return {
+        index: maxNumber,
         previous: data[maxNumber - 1],
         now: data[maxNumber],
         next: data[startIndex],

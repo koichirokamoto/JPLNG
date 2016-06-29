@@ -5,9 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { Top } from './app/Top';
+import Top from './app/Top';
 import store from './app/store';
 
 class JPLNG extends Component {

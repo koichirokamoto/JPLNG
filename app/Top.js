@@ -12,6 +12,8 @@ class Top extends Component {
     this.onPressForSound = this.onPressForSound.bind(this);
     this.onPressForBack = this.onPressForBack.bind(this);
     this.onPressForForward = this.onPressForForward.bind(this);
+    this.onPressForStart = this.onPressForStart.bind(this);
+    this.onPressForEnd = this.onPressForEnd.bind(this);
   }
 
   onPressForSound() {
@@ -19,26 +21,26 @@ class Top extends Component {
   }
 
   onPressForBack() {
-    this.setState(this.props.store.dispatch(this.state, 'BACK').word)
+    this.props.dispatch({ word: this.props.word, type: 'BACK' });
   }
 
   onPressForForward() {
-    this.setState(this.props.store.dispatch(this.state, 'FORWARD').word)
+    this.props.dispatch({ word: this.props.word, type: 'FORWARD' });
   }
 
   onPressForStart() {
-    this.setState(this.props.store.dispatch(this.state, 'START').word)
+    this.props.dispatch({ word: this.props.word, type: 'START' });
   }
 
   onPressForEnd() {
-    this.setState(this.props.store.dispatch(this.state, 'END').word)
+    this.props.dispatch({ word: this.props.word, type: 'END' });
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.hiragana} onPress={this.onPressForSound}>
-          {this.props.now}
+          {this.props.word.now}
         </Text>
         <Text style={styles.menu} onPress={this.onPressForBack}>
           もどる
@@ -60,7 +62,6 @@ class Top extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    fontFamily: 'ヒラギノ角ゴ Pro',
   },
   hiragana: {
     fontSize: 50,
