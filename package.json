@@ -3,12 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "replace": "repdep ./",
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
     "react": "^15.1.0",
-    "react-native": "0.27.2",
+    "react-native": "^0.28.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2"
+  },
+  "devDependencies": {
+    "repdep": "^1.1.1"
   }
 }

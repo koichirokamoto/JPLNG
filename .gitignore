@@ -41,3 +41,6 @@ android/keystores/debug.keystore
 
 # VSC
 .vscode
+
+# repdep
+package.json.old

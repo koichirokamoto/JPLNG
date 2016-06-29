@@ -5,9 +5,19 @@ export type Word = {
 };
 
 const startIndex = 0;
-const maxNumber = 9;
+const maxNumber = 40;
 
-const data = ['あ', 'い', 'う', 'え', 'お', 'か', 'き', 'く', 'け', 'こ'];
+const data = [
+  'あ', 'い', 'う', 'え', 'お', 
+  'か', 'き', 'く', 'け', 'こ',
+  'さ', 'し', 'す', 'せ', 'そ',
+  'た', 'ち', 'つ', 'て', 'と',
+  'な', 'に', 'ぬ', 'ね', 'の',
+  'は', 'ひ', 'ふ', 'へ', 'ほ',
+  'ま', 'み', 'む', 'め', 'も',
+  'や', 'ゆ', 'よ', 'わ', 'を',
+  'ん'
+];
 
 const initialState: Word = {
   previous: data[maxNumber],
@@ -22,7 +32,7 @@ export default (state: Word = initialState, action) => {
       return {
         previous: now,
         now: next,
-        next: data[10 % nextIndex]
+        next: data[41 % nextIndex]
       };
     case 'BACK':
       previousIndex = data.indexOf(previous) - 1;
@@ -30,7 +40,7 @@ export default (state: Word = initialState, action) => {
         previousIndex = maxNumber;
       }
       return {
-        previous: data[10 % previousIndex],
+        previous: data[41 % previousIndex],
         now: previous,
         next: now,
       };

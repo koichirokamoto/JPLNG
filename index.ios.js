@@ -7,10 +7,8 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { Top } from './app';
-import store from './store';
-
-var store = configureStore()
+import { Top } from './app/Top';
+import store from './app/store';
 
 class JPLNG extends Component {
   render() {
