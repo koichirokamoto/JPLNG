@@ -31,29 +31,40 @@ export default (state: Word = initialState, action) => {
   word = action.word
   switch (action.type) {
     case 'FORWARD':
-      word.index += 1;
-      if (word.index > 40) {
+      if (word.index === maxNumber) {
         word.index = startIndex;
+      } else if (word.index + 1 === maxNumber) {
+        word.index = startIndex - 1;
+      } else {
+        word.index += 1;
       }
       return {
         index: word.index,
         previous: word.now,
         now: word.next,
-        next: data[word.index],
+        next: data[word.index + 1],
       };
     case 'BACK':
-      word.index -= 1;
-      if (word.index < 0) {
+      if (word.index === startIndex) {
         word.index = maxNumber;
+      } else if (word.index - 1 === startIndex) {
+        word.index = maxNumber + 1;
+      } else {
+        word.index -= 1;
       }
       return {
         index: word.index,
-        previous: data[word.index],
+        previous: data[word.index - 1],
         now: word.previous,
         next: word.now,
       };
     case 'START':
-      return initialState;
+      return {
+        index: startIndex,
+        previous: data[maxNumber],
+        now: data[startIndex],
+        next: data[startIndex + 1],
+      }
     case 'END':
       return {
         index: maxNumber,
