@@ -1,3 +1,5 @@
+import type { WordAction } from '../actions/word';
+
 export type Word = {
   index: number;
   previous: string;
@@ -8,7 +10,7 @@ export type Word = {
 const startIndex = 0;
 const maxNumber = 40;
 
-const data = [
+export const data = [
   'あ', 'い', 'う', 'え', 'お',
   'か', 'き', 'く', 'け', 'こ',
   'さ', 'し', 'す', 'せ', 'そ',
@@ -27,7 +29,7 @@ const initialState: Word = {
   next: data[startIndex + 1],
 };
 
-export default (state: Word = initialState, action) => {
+export default (state: Word = initialState, action: WordAction) => {
   word = action.word
   switch (action.type) {
     case 'FORWARD':
