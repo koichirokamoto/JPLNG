@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flex: 1,
-    marginBottom: 20,
+    marginBottom: 15,
   },
   menu: {
     width: 250,
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 25,
     marginBottom: 5,
-    color: '#FAF0E6',
+    color: '#FFFF92',
   },
   menuRight: {
     fontSize: 30,
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginRight: 10,
     marginBottom: 5,
-    color: '#FAF0E6',
+    color: '#FFFF92',
   },
   verticalBorder: {
     width: 2,
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 40,
     marginTop: 10,
-    color: '#FAF0E6',
+    color: '#7ECBDC',
     alignSelf: 'center',
   },
   listContainer: {
