@@ -86,6 +86,25 @@ export default (state: Word = initialState, action: WordAction) => {
         ...state,
         isList: true,
       };
+    case 'MOVE':
+      let index = data.indexOf(action.now);
+      let previousIndex = index -1;
+      let nextIndex = index + 1;
+
+      if (index === startIndex) {
+        previousIndex = maxNumber;
+      } 
+      if (index === maxNumber) {
+        nextIndex = startIndex;
+      }
+
+      return {
+        index: index,
+        previous: data[previousIndex],
+        now: data[index],
+        next: data[nextIndex],
+        isList: false,
+      };
   }
   return state;
 };

@@ -16,6 +16,7 @@ class Top extends Component {
     this.onPressForStart = this.onPressForStart.bind(this);
     this.onPressForEnd = this.onPressForEnd.bind(this);
     this.onPressList = this.onPressList.bind(this);
+    this.onPressListItem = this.onPressListItem.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +47,10 @@ class Top extends Component {
     this.props.dispatch({ word: this.props.word, type: 'LIST' });
   }
 
+  onPressListItem(now) {
+    this.props.dispatch({ now: now, type: 'MOVE' });
+  }
+
   render() {
     if (this.props.word.isList) {
       return this.renderList();
@@ -58,6 +63,7 @@ class Top extends Component {
       <List
         listStyle={styles.listContainer}
         now={this.props.word.now}
+        onPressListItem={this.onPressListItem}
       />
     );
   }
@@ -194,10 +200,9 @@ const styles = StyleSheet.create({
   listContainer: {
     width: 250,
     height: 500,
-    marginTop: 30,
-    marginLeft: 30,
-    marginRight: 30,
+    marginTop: 50,
     marginBottom: 50,
+    alignSelf: 'center',
   },
 });
 

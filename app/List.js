@@ -3,8 +3,10 @@ import {
   ListView,
   StyleSheet,
   Text,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import createFragment from 'react-addons-create-fragment';
 
 const data = [
   ['あ', 'い', 'う', 'え', 'お'],
@@ -15,8 +17,7 @@ const data = [
   ['は', 'ひ', 'ふ', 'へ', 'ほ'],
   ['ま', 'み', 'む', 'め', 'も'],
   ['や', ' ', 'ゆ', ' ', 'よ'],
-  ['わ', ' ', ' ', ' ', 'を'],
-  ['ん', ' ', ' ', ' ', ' '],
+  ['わ', ' ', 'を', ' ', 'ん'],
 ];
 
 class List extends Component {
@@ -25,19 +26,29 @@ class List extends Component {
     let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => false });
     this.state = { ds: ds };
     this.renderData = this.renderData.bind(this);
+    this.onPressItem = this.onPressItem.bind(this);
+  }
+
+  onPressItem(item) {
+    this.props.onPressListItem(item);
   }
 
   renderData(row) {
-    let items = row.map((item) => {
-      let itemStyle = styles.listItem;
-      if (item === this.props.now) {
-        itemStyle = styles.now;
-      }
-      return (
-        <Text style={itemStyle}>
-          {item}
-        </Text>
-      );
+    let items = createFragment({
+      items: row.map((item) => {
+        let itemStyle = styles.listItem;
+        if (item === this.props.now) {
+          itemStyle = styles.now;
+        }
+        return (
+          <Text
+            ref={item}
+            style={itemStyle}
+            onPress={() => this.onPressItem(item)}>
+            {item}
+          </Text>
+        );
+      }),
     });
     return (
       <View style={styles.itemContainer}>
