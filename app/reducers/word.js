@@ -1,4 +1,5 @@
 import type { WordAction } from '../actions/word';
+import RNSound from 'react-native-sound';
 
 export type Word = {
   index: number;
@@ -6,6 +7,7 @@ export type Word = {
   now: string;
   next: string;
   isList: bool;
+  sound: Object;
 };
 
 const startIndex = 0;
@@ -23,12 +25,23 @@ export const data = [
   'ん'
 ];
 
+let getSound: Function = (index) => {
+  let soundFile = index + '.m4a';
+  let sound = new RNSound(soundFile, RNSound.MAIN_BUNDLE, (error) => {
+    if (error) {
+      console.log('load sound is failed', error);
+    }
+  });
+  return sound;
+};
+
 const initialState: Word = {
   index: startIndex,
   previous: data[maxNumber],
   now: data[startIndex],
   next: data[startIndex + 1],
   isList: false,
+  sound: getSound(startIndex),
 };
 
 export default (state: Word = initialState, action: WordAction) => {
@@ -48,6 +61,7 @@ export default (state: Word = initialState, action: WordAction) => {
         now: word.next,
         next: data[word.index + 1],
         isList: false,
+        sound: getSound(word.index),
       };
     case 'BACK':
       if (word.index === startIndex) {
@@ -63,6 +77,7 @@ export default (state: Word = initialState, action: WordAction) => {
         now: word.previous,
         next: word.now,
         isList: false,
+        sound: getSound(word.index),
       };
     case 'INIT':
     case 'START':
@@ -72,6 +87,7 @@ export default (state: Word = initialState, action: WordAction) => {
         now: data[startIndex],
         next: data[startIndex + 1],
         isList: false,
+        sound: getSound(startIndex),
       };
     case 'END':
       return {
@@ -80,6 +96,7 @@ export default (state: Word = initialState, action: WordAction) => {
         now: data[maxNumber],
         next: data[startIndex],
         isList: false,
+        sound: getSound(maxNumber),
       };
     case 'LIST':
       return {
@@ -88,12 +105,12 @@ export default (state: Word = initialState, action: WordAction) => {
       };
     case 'MOVE':
       let index = data.indexOf(action.now);
-      let previousIndex = index -1;
+      let previousIndex = index - 1;
       let nextIndex = index + 1;
 
       if (index === startIndex) {
         previousIndex = maxNumber;
-      } 
+      }
       if (index === maxNumber) {
         nextIndex = startIndex;
       }
@@ -104,6 +121,7 @@ export default (state: Word = initialState, action: WordAction) => {
         now: data[index],
         next: data[nextIndex],
         isList: false,
+        sound: getSound(index),
       };
   }
   return state;

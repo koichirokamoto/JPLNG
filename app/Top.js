@@ -24,7 +24,7 @@ class Top extends Component {
   }
 
   onPressForSound() {
-    this.props.dispatch({ now: this.props.word.now, type: 'SOUND' });
+    this.props.dispatch({ sound: this.props.word.sound, type: 'SOUND' });
   }
 
   onPressForBack() {
