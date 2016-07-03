@@ -7,14 +7,14 @@ export default (state = {}, action: SoundAction) => {
     case 'SOUND':
       index = data.indexOf(action.now);
       soundFile = index + '.mp3';
-      let sound = new Sound(soundFile, RNSound.MAIN_BUNDLE, (error) => {
-        if (error) {
-          alert('failed to load the sound', error);
-        }
+      let sound = new RNSound(soundFile, RNSound.MAIN_BUNDLE, (error) => {
+        console.log('load sound is failed', error);
       });
       sound.play((success) => {
-        if (success === undefined) {
-          alert('failed due to audio decoding errors');
+        if (success) {
+          console.log('play sound is success');
+        } else {
+          console.log('play sound is failed');
         }
       });
   }

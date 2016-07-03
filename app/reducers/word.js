@@ -5,6 +5,7 @@ export type Word = {
   previous: string;
   now: string;
   next: string;
+  isList: bool;
 };
 
 const startIndex = 0;
@@ -27,6 +28,7 @@ const initialState: Word = {
   previous: data[maxNumber],
   now: data[startIndex],
   next: data[startIndex + 1],
+  isList: false,
 };
 
 export default (state: Word = initialState, action: WordAction) => {
@@ -45,6 +47,7 @@ export default (state: Word = initialState, action: WordAction) => {
         previous: word.now,
         now: word.next,
         next: data[word.index + 1],
+        isList: false,
       };
     case 'BACK':
       if (word.index === startIndex) {
@@ -59,21 +62,30 @@ export default (state: Word = initialState, action: WordAction) => {
         previous: data[word.index - 1],
         now: word.previous,
         next: word.now,
+        isList: false,
       };
+    case 'INIT':
     case 'START':
       return {
         index: startIndex,
         previous: data[maxNumber],
         now: data[startIndex],
         next: data[startIndex + 1],
-      }
+        isList: false,
+      };
     case 'END':
       return {
         index: maxNumber,
         previous: data[maxNumber - 1],
         now: data[maxNumber],
         next: data[startIndex],
-      }
+        isList: false,
+      };
+    case 'LIST':
+      return {
+        ...state,
+        isList: true,
+      };
   }
   return state;
 };

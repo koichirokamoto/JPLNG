@@ -4,7 +4,8 @@ import {
   Text,
   View
 } from 'react-native';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import List from './List';
 
 class Top extends Component {
   constructor() {
@@ -14,6 +15,11 @@ class Top extends Component {
     this.onPressForForward = this.onPressForForward.bind(this);
     this.onPressForStart = this.onPressForStart.bind(this);
     this.onPressForEnd = this.onPressForEnd.bind(this);
+    this.onPressList = this.onPressList.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.dispatch({ word: this.props.word, type: 'INIT' });
   }
 
   onPressForSound() {
@@ -36,7 +42,27 @@ class Top extends Component {
     this.props.dispatch({ word: this.props.word, type: 'END' });
   }
 
+  onPressList() {
+    this.props.dispatch({ word: this.props.word, type: 'LIST' });
+  }
+
   render() {
+    if (this.props.word.isList) {
+      return this.renderList();
+    }
+    return this.renderHiragana();
+  }
+
+  renderList() {
+    return (
+      <List
+        listStyle={styles.listContainer}
+        now={this.props.word.now}
+      />
+    );
+  }
+
+  renderHiragana() {
     return (
       <View style={styles.container}>
         <Text style={styles.hiragana} onPress={this.onPressForSound}>
@@ -71,6 +97,9 @@ class Top extends Component {
             </Text>
           </View>
         </View>
+        <Text style={styles.list} onPress={this.onPressList}>
+          いちらん
+        </Text>
       </View>
     );
   }
@@ -108,7 +137,7 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flex: 1,
-    marginBottom: 50,
+    marginBottom: 20,
   },
   menu: {
     width: 250,
@@ -153,6 +182,22 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#FAF0E6',
     alignSelf: 'center',
+  },
+  list: {
+    fontSize: 30,
+    width: 120,
+    height: 40,
+    marginTop: 10,
+    color: '#FAF0E6',
+    alignSelf: 'center',
+  },
+  listContainer: {
+    width: 250,
+    height: 500,
+    marginTop: 30,
+    marginLeft: 30,
+    marginRight: 30,
+    marginBottom: 50,
   },
 });
 
