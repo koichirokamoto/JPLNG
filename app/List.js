@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Dimensions,
   ListView,
   StyleSheet,
   Text,
@@ -20,6 +21,10 @@ const data = [
   ['わ', ' ', 'を', ' ', 'ん'],
 ];
 
+const { height, width } = Dimensions.get('window');
+const baseHeight = 568;
+const baseWidth = 320;
+
 class List extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +35,9 @@ class List extends Component {
   }
 
   onPressItem(item) {
-    this.props.onPressListItem(item);
+    if (item !== null && item !== ' ' && item !== '') {
+      this.props.onPressListItem(item);
+    }
   }
 
   renderData(row) {
@@ -44,7 +51,7 @@ class List extends Component {
           <Text
             ref={item}
             style={itemStyle}
-            onPress={() => this.onPressItem(item)}>
+            onPress={() => this.onPressItem(item) }>
             {item}
           </Text>
         );
@@ -76,26 +83,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#1D543F',
   },
   listItem: {
-    width: 50,
-    height: 50,
-    fontSize: 50,
-    borderWidth: 1,
+    width: (50 / baseWidth) * width,
+    height: (50 / baseWidth) * width,
+    fontSize: (50 / baseWidth) * width,
+    borderWidth: (1 / baseWidth) * width,
     borderColor: '#FAF0E6',
     alignSelf: 'center',
     color: '#FAF0E6',
   },
   now: {
-    width: 50,
-    height: 50,
-    fontSize: 50,
-    borderWidth: 1,
+    width: (50 / baseWidth) * width,
+    height: (50 / baseWidth) * width,
+    fontSize: (50 / baseWidth) * width,
+    borderWidth: (1 / baseWidth) * width,
     borderColor: '#FAF0E6',
     alignSelf: 'center',
     color: '#F7ABAD',
   },
   itemContainer: {
-    width: 250,
-    height: 50,
+    width: (250 / baseWidth) * width,
+    height: (50 / baseWidth) * width,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

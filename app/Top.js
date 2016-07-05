@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import {
+  Dimensions,
   StyleSheet,
   Text,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
 import List from './List';
+
+const { height, width } = Dimensions.get('window');
+const baseHeight = 568;
+const baseWidth = 320;
 
 class Top extends Component {
   constructor() {
@@ -64,7 +69,7 @@ class Top extends Component {
         listStyle={styles.listContainer}
         now={this.props.word.now}
         onPressListItem={this.onPressListItem}
-      />
+        />
     );
   }
 
@@ -117,91 +122,87 @@ const styles = StyleSheet.create({
     backgroundColor: '#1D543F',
   },
   hiragana: {
-    width: 250,
-    height: 250,
-    fontSize: 250,
+    width: (250 / baseWidth) * width,
+    height: (250 / baseWidth) * width,
+    fontSize: (250 / baseWidth) * width,
     fontWeight: 'bold',
-    marginTop: 20,
-    marginRight: 50,
-    marginLeft: 50,
+    marginTop: (20 / baseHeight) * height,
     alignSelf: 'center',
     color: '#F7ABAD',
   },
   beforeAfter: {
-    width: 250,
-    height: 125,
+    width: (250 / baseWidth) * width,
+    height: (125 / baseWidth) * width,
     alignSelf: 'center',
     flexDirection: 'row',
-    marginBottom: 30,
+    marginBottom: (30 / baseWidth) * width,
   },
   beforeAfterHiragana: {
-    width: 125,
-    height: 125,
-    fontSize: 125,
+    width: (125 / baseWidth) * width,
+    height: (125 / baseWidth) * width,
+    fontSize: (125 / baseWidth) * width,
     alignSelf: 'center',
     color: '#FAF0E6',
   },
   menuContainer: {
     flex: 1,
-    marginBottom: 15,
+    marginBottom: (15 / baseHeight) * height,
   },
   menu: {
-    width: 250,
+    width: (250 / baseWidth) * width,
     marginTop: 0,
-    marginRight: 50,
-    marginLeft: 50,
     marginBottom: 0,
     flex: 1,
     flexDirection: 'row',
     alignSelf: 'center',
   },
   menuLeft: {
-    fontSize: 30,
-    width: 90,
-    height: 40,
-    marginTop: 5,
-    marginLeft: 10,
-    marginRight: 25,
-    marginBottom: 5,
+    fontSize: (30 / baseWidth) * width,
+    width: (100 / baseWidth) * width,
+    height: (40 / baseWidth) * width,
+    marginTop: (5 / baseWidth) * width,
+    marginLeft: (15 / baseWidth) * width,
+    marginRight: (10 / baseWidth) * width,
+    marginBottom: (5 / baseWidth) * width,
     color: '#FFFF92',
   },
   menuRight: {
-    fontSize: 30,
-    width: 90,
-    height: 40,
-    marginTop: 5,
-    marginLeft: 25,
-    marginRight: 10,
-    marginBottom: 5,
+    fontSize: (30 / baseWidth) * width,
+    width: (100 / baseWidth) * width,
+    height: (40 / baseWidth) * width,
+    marginTop: (5 / baseWidth) * width,
+    marginLeft: (15 / baseWidth) * width,
+    marginRight: (10 / baseWidth) * width,
+    marginBottom: (5 / baseWidth) * width,
     color: '#FFFF92',
   },
   verticalBorder: {
     width: 2,
-    height: 60,
+    height: (60 / baseWidth) * width,
     borderWidth: 2,
     borderColor: '#FAF0E6',
     alignSelf: 'center',
   },
   horizonBorder: {
-    width: 250,
+    width: (250 / baseWidth) * width,
     height: 2,
     borderWidth: 2,
     borderColor: '#FAF0E6',
     alignSelf: 'center',
   },
   list: {
-    fontSize: 30,
-    width: 120,
-    height: 40,
-    marginTop: 10,
+    fontSize: (30 / baseWidth) * width,
+    width: (130 / baseWidth) * width,
+    height: (40 / baseWidth) * width,
+    marginTop: (10 / baseHeight) * height,
     color: '#7ECBDC',
     alignSelf: 'center',
   },
   listContainer: {
-    width: 250,
-    height: 500,
-    marginTop: 50,
-    marginBottom: 50,
+    width: (250 / baseWidth) * width,
+    height: (500 / baseWidth) * width,
+    marginTop: (50 / baseHeight) * height,
+    marginBottom: (50 / baseHeight) * height,
     alignSelf: 'center',
   },
 });
