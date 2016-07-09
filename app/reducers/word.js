@@ -48,36 +48,38 @@ export default (state: Word = initialState, action: WordAction) => {
   word = action.word
   switch (action.type) {
     case 'FORWARD':
+      let fIndex = word.index + 1;
       if (word.index === maxNumber) {
-        word.index = startIndex;
-      } else if (word.index + 1 === maxNumber) {
-        word.index = startIndex - 1;
-      } else {
-        word.index += 1;
+        fIndex = startIndex;
+      }
+      let fNextIndex = fIndex + 1;
+      if (fIndex ===  maxNumber) {
+        fNextIndex = startIndex;
       }
       return {
-        index: word.index,
+        index: fIndex,
         previous: word.now,
         now: word.next,
-        next: data[word.index + 1],
+        next: data[fNextIndex],
         isList: false,
-        sound: getSound(word.index),
+        sound: getSound(fIndex),
       };
     case 'BACK':
+      let bIndex = word.index - 1;
       if (word.index === startIndex) {
-        word.index = maxNumber;
-      } else if (word.index - 1 === startIndex) {
-        word.index = maxNumber + 1;
-      } else {
-        word.index -= 1;
+        bIndex = maxNumber;
+      }
+      let bPreviousIndex = bIndex - 1;
+      if (bIndex === startIndex) {
+        bPreviousIndex = maxNumber;
       }
       return {
-        index: word.index,
-        previous: data[word.index - 1],
+        index: bIndex,
+        previous: data[bPreviousIndex],
         now: word.previous,
         next: word.now,
         isList: false,
-        sound: getSound(word.index),
+        sound: getSound(bIndex),
       };
     case 'INIT':
     case 'START':
