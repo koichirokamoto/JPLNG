@@ -4,20 +4,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import { Provider } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import Top from './app/Top';
-import store from './app/store';
-
-class JPLNG extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Top />
-      </Provider>
-    );
-  }
-}
+import JPLNG from './app/JPLNG';
 
 AppRegistry.registerComponent('JPLNG', () => JPLNG);
