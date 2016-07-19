@@ -7,4 +7,4 @@
 import { AppRegistry } from 'react-native';
 import JPLNG from './app/JPLNG';
 
-AppRegistry.registerComponent('JPLNG', () => JPLNG);
+AppRegistry.registerComponent('aiueo', () => JPLNG);
